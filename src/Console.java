@@ -125,26 +125,26 @@ public class Console {
             modeSelect=selectMode(0);
         if(modeSelect == -1)
             return;
-        IA computer = new IA(nbCombination);
-        computer.init();
-        Player player = new Player(nbCombination);
-        IA computer1 = new IA(nbCombination);
-        computer.init();
-        Player player1 = new Player(nbCombination);
+        IA computerDefense = new IA(nbCombination,"computerDefense");
+        computerDefense.init();
+        Player playerAttack = new Player(nbCombination,"playerAttack");
+        IA computerAttack = new IA(nbCombination,"computerAttack");
+        computerDefense.init();
+        Player playerDefense = new Player(nbCombination,"playerDefense");
 
         victory = false;
         for (int i = 0; i < nbTest && victory == false; i++){
             System.out.println("Tour "+(i+1)+" :");
             if(modeSelect == 1)
-                challenger(player,computer,i);
+                challenger(playerAttack,computerDefense,i);
             else if(modeSelect ==2)
-                defender(player,computer,i);
+                defender(playerAttack,computerDefense,i);
             else if(modeSelect == 3)
-                duel(player, computer, player1, computer1, i);
+                duel(playerAttack, computerDefense, playerDefense, computerAttack, i);
         }
         if(victory==false){
             System.out.println("the answer was :");
-            computer.display();
+            computerDefense.display();
         }
 
 
@@ -213,7 +213,7 @@ public class Console {
         System.out.println(result);
         if(result.equals("====")){
             victory = true;
-            System.out.println("the player win this game en "+index+" move(s)");
+            System.out.println("the player win this game in "+(index+1)+" move(s)");
         }
     }
 
@@ -254,7 +254,7 @@ public class Console {
         System.out.println(result);
         if(result.equals("====")){
             victory = true;
-            System.out.println("the computer win this game en "+index+" move(s)");
+            System.out.println("the computer win this game en "+(index+1)+" move(s)");
         }
 
     }

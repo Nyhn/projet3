@@ -8,6 +8,7 @@ import static java.lang.Math.random;
  *         <li>A matrix of choice</li>
  *         <li>A table of combination</li>
  *         <li>A size of combination</li>
+ *         <li>A name</li>
  *     </ul>
  *
  * @see Entity
@@ -37,11 +38,12 @@ public class IA extends Entity{
      *            the size of combination.
      *
      * @see Entity#sizeCombination
-     * @see Entity#Entity(int)
+     * @see Entity#name
+     * @see Entity#Entity(int, String)
      * @see IA#init()
      */
-    public IA(int sizeCombination) {
-        super(sizeCombination);
+    public IA(int sizeCombination, String name) {
+        super(sizeCombination,name);
         init();
     }
 
@@ -97,7 +99,7 @@ public class IA extends Entity{
      * @see Entity#display()
      */
     public void display(){
-        System.out.print("IA     : ");
+        System.out.print("(Proposition of "+ name +")");
         super.display();
     }
 

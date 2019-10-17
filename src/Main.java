@@ -6,7 +6,7 @@ public class Main {
      * @see Console
      */
     public static void main(String[] args) {
-        Console console = new Console(4,true,10);
+        Console console = new Console(4,false,10);
         console.run();
     }
 }

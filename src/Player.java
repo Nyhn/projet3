@@ -8,6 +8,7 @@ import java.util.Scanner;
  *         <li>A matrix of choice</li>
  *         <li>A table of combination</li>
  *         <li>A size of combination</li>
+ *
  *     </ul>
  *
  * @see Entity
@@ -27,10 +28,11 @@ public class Player extends Entity{
      *            the size of combination.
      *
      * @see Entity#sizeCombination
-     * @see Entity#Entity(int)
+     * @see Entity#name
+     * @see Entity#Entity(int, String)
      */
-    public Player(int sizeCombination) {
-        super(sizeCombination);
+    public Player(int sizeCombination, String name) {
+        super(sizeCombination, name);
     }
 
     /**
@@ -45,9 +47,8 @@ public class Player extends Entity{
         Scanner scan = new Scanner(System.in);
         String enter;
         do {
-            System.out.println("Choix d'un nombre à " + sizeCombination + " chiffres");
+            System.out.print("(Proposition of " +name + ")");
             enter = scan.nextLine();
-            System.out.println(enter);
         }while (enter.length() != sizeCombination);
         for(int i =0; i < sizeCombination;i++)
                 this.combination[i]= Character.digit(enter.charAt(i),10);

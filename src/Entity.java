@@ -5,12 +5,17 @@
  *     <ul>
  *         <li>A board of combination</li>
  *         <li>A size of combination</li>
+ *         <li>A name</li>
  *     </ul>
  *
  * @author Geoffrey
  * @version 1.0
  */
 public abstract class Entity {
+    /**
+     * Name is an ID unique
+     */
+    protected String name;
     /**
      * sizeCombination is the size of combination
      * ex: XXX a combination of 3
@@ -34,7 +39,8 @@ public abstract class Entity {
      * @see Entity#combination
      * @see Entity#sizeCombination
      */
-    public Entity(int sizeCombination) {
+    public Entity(int sizeCombination, String name) {
+        this.name = name;
         this.sizeCombination = sizeCombination;
         combination = new int[sizeCombination];
     }
