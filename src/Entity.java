@@ -1,12 +1,12 @@
 /**
  * <b> Entity is a representation of an element player</b>
  * <p>
- *     Entity is characterized by :
- *     <ul>
- *         <li>A board of combination</li>
- *         <li>A size of combination</li>
- *         <li>A name</li>
- *     </ul>
+ * Entity is characterized by :
+ * <ul>
+ * <li>A board of combination</li>
+ * <li>A size of combination</li>
+ * <li>A name</li>
+ * </ul>
  *
  * @author Geoffrey
  * @version 1.0
@@ -30,12 +30,12 @@ public abstract class Entity {
     /**
      * Builder Entity
      * <p>
-     *     when building a IA object, we define the size of combination
-     *     and create a table combination
+     * when building a IA object, we define the size of combination
+     * and create a table combination
      * </p>
      *
-     * @param sizeCombination
-     *      the size of combination
+     * @param sizeCombination the size of combination
+     * @param name name is a name of player
      * @see Entity#combination
      * @see Entity#sizeCombination
      */
@@ -49,27 +49,33 @@ public abstract class Entity {
      * abstract function to redefine
      */
     public abstract void defense();
+
     /**
      * abstract function to redefine
      */
     public abstract void attack();
+
     /**
      * abstract function to redefine
-     * @param signs
-     *      the signs to update
-     * @param index
-     *      the box compared
+     *
+     * @param sign the signs to update
+     * @param index the box compared
      */
-    public abstract void update(char signs, int index);
+    public abstract void updateTable(char sign, int index);
+
+    public abstract void update(String signs);
 
     /**
      * Display the combination
      */
-    public void display(){
-        for(int i = 0; i < this.sizeCombination; i++){
+    public void display() {
+        for (int i = 0; i < this.sizeCombination; i++) {
             System.out.print(combination[i]);
         }
         System.out.println();
     }
 
+    public String getName() {
+        return name;
+    }
 }

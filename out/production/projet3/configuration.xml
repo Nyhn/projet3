@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE data [
+        <!ELEMENT data (sizeCombination|nbTest|modeDev)*>
+        <!ATTLIST data
+                xs:noNamespaceSchemaLocation CDATA #REQUIRED
+                xmlns:xs CDATA #REQUIRED>
+        <!ELEMENT sizeCombination (#PCDATA)>
+        <!ELEMENT nbTest (#PCDATA)>
+        <!ELEMENT modeDev (#PCDATA)>
+        ]>
+<data
+        xs:noNamespaceSchemaLocation="configuration.xsd"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+>
+    <sizeCombination>4</sizeCombination>
+    <nbTest>5</nbTest>
+    <modeDev>false</modeDev>
+</data>
