@@ -1,3 +1,5 @@
+import org.apache.log4j.Logger;
+
 /**
  * <b> Entity is a representation of an element player</b>
  * <p>
@@ -26,7 +28,7 @@ public abstract class Entity {
      * Combination is a table of int ( between 0-9)
      */
     protected int[] combination;
-
+    private static final Logger logger = Logger.getLogger(Entity.class);
     /**
      * Builder Entity
      * <p>
@@ -40,6 +42,8 @@ public abstract class Entity {
      * @see Entity#sizeCombination
      */
     public Entity(int sizeCombination, String name) {
+        logger.trace("Instanciation d'un Objet Entity");
+        logger.debug("sizeCombination = "+sizeCombination+" , name = "+name);
         this.name = name;
         this.sizeCombination = sizeCombination;
         combination = new int[sizeCombination];
@@ -69,12 +73,20 @@ public abstract class Entity {
      * Display the combination
      */
     public void display() {
+        logger.trace("Entrée méthodes display");
         for (int i = 0; i < this.sizeCombination; i++) {
             System.out.print(combination[i]);
         }
         System.out.println();
+        logger.trace("Sortie méthode display");
     }
 
+    /**
+     * Getter of Name
+     * @return Name
+     *      name of class Entity
+     * @see Entity#name
+     */
     public String getName() {
         return name;
     }

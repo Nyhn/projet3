@@ -1,3 +1,5 @@
+import org.apache.log4j.Logger;
+
 import java.util.Scanner;
 
 /**
@@ -16,7 +18,7 @@ import java.util.Scanner;
  * @see Entity
  */
 public class Player extends Entity {
-
+    private static final Logger logger = Logger.getLogger(Player.class);
     /**
      * Builder Player.
      * <p>
@@ -32,6 +34,8 @@ public class Player extends Entity {
      */
     public Player(int sizeCombination, String name) {
         super(sizeCombination, name);
+        logger.trace("Instanciation d'un objet Player");
+        logger.debug("sizeCombination = "+sizeCombination+" et name = "+name);
     }
 
     /**
@@ -44,14 +48,16 @@ public class Player extends Entity {
      */
     @Override
     public void defense() {
+        logger.trace("Entrée méthode defense");
         Scanner scan = new Scanner(System.in);
         String enter;
         do {
-            System.out.print("(Proposition of " + name + ")");
+            System.out.print("["+name+"](Combination of " + sizeCombination + ") :");
             enter = scan.nextLine();
         } while (enter.length() != sizeCombination);
         for (int i = 0; i < sizeCombination; i++)
             this.combination[i] = Character.digit(enter.charAt(i), 10);
+        logger.trace("Sortie méthode defense");
     }
 
     /**
@@ -62,7 +68,9 @@ public class Player extends Entity {
      */
     @Override
     public void attack() {
+        logger.trace("Entrée méthode attack");
         this.defense();
+        logger.trace("Sortie méthode attack");
     }
 
     /**
@@ -87,7 +95,9 @@ public class Player extends Entity {
      * @see Entity#display()
      */
     public void display() {
+        logger.trace("Entrée méthode display");
         System.out.print("Player : ");
         super.display();
+        logger.trace("Sortie méthode display");
     }
 }

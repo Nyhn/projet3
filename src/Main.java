@@ -1,3 +1,5 @@
+import org.apache.log4j.Logger;
+
 import java.io.File;
 
 public class Main {
@@ -7,12 +9,12 @@ public class Main {
      * @param args Args no use
      * @see Console
      */
+    private static Logger logger = Logger.getLogger(Main.class);
     public static void main(String[] args) {
-        ConfigLog4j out = new ConfigLog4j();
+        logger.info("Lancement du programme");
         ConfigJSON configuration = new ConfigJSON(new File("configuration.json"));
         Console console = new Console(configuration.readSizeCombination(), configuration.readModeDev(), configuration.readNbTest());
-
-
         console.run();
+        logger.info("Fin du programme");
     }
 }

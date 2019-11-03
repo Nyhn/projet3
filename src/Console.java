@@ -1,3 +1,4 @@
+import org.apache.log4j.Logger;
 import java.util.Scanner;
 
 /**
@@ -17,6 +18,8 @@ import java.util.Scanner;
  * @version 1.0
  */
 public class Console {
+
+    private static final Logger logger = Logger.getLogger("Console");
     /**
      * number of test. this nbTest can't be change
      */
@@ -74,6 +77,8 @@ public class Console {
         this.nbCombination = nbCombination;
         this.modeDev = modeDev;
         this.nbTest = nbTest;
+        logger.trace("Instanciation d'un objet Console ");
+        logger.debug("nbCombinaison = "+nbCombination+" ,nbtest = "+nbTest+" ,modeDev = "+modeDev);
     }
 
     /**
@@ -84,10 +89,12 @@ public class Console {
      * @see Console#CreateGame()
      */
     public void run() {
+        logger.trace("Entrée méthodes Run");
         do {
             CreateGame();
             selectEndMenu();
         } while (choice != 0);
+        logger.trace("sortie méthodes Run");
     }
 
     /**
@@ -102,6 +109,7 @@ public class Console {
      * @see Console#displayEndMenu()
      */
     public void selectEndMenu() {
+        logger.trace("Entrée méthodes selectEndMenu");
         int statue;
         Scanner scan = new Scanner(System.in);
         displayEndMenu();
@@ -110,16 +118,19 @@ public class Console {
             choice = statue;
         else
             choice = 0;
+        logger.trace("sortie méthodes SelectEndMenu");
     }
 
     /**
      * Display the menu of the end of game
      */
     public void displayEndMenu() {
+        logger.trace("Entrée méthodes displayEndMenu");
         System.out.println("What do you want ?");
         System.out.println("    0 : Stop the game.");
         System.out.println("    1 : Restart with the same mode.");
         System.out.println("    2 : Change the mode");
+        logger.trace("sortie méthodes DisplayEndMenu");
     }
 
     /**
@@ -135,10 +146,13 @@ public class Console {
      * @see Console#isVictory(Entity)
      */
     public void CreateGame() {
+        logger.trace("Entrée méthodes CreateGame");
         if (choice != 1)
             modeSelect = selectMode(0);
-        if (modeSelect == -1)
+        if (modeSelect == -1) {
+            logger.warn("Sortie méthodes CreateGame : Pas de choix selectionné");
             return;
+        }
         victory = false;
         IA computerDefense = new IA(nbCombination, "computerDefense");
         computerDefense.init();
@@ -146,9 +160,11 @@ public class Console {
         IA computerAttack = new IA(nbCombination, "computerAttack");
         computerDefense.init();
         Player playerDefense = new Player(nbCombination, "playerDefense");
-
+        logger.info("Lancement du jeux");
         game(playerAttack, computerDefense, playerDefense, computerAttack);
+        logger.info("Fin du jeux");
         isVictory(computerDefense);
+        logger.trace("sortie méthodes CreateGame");
     }
 
     /**
@@ -157,10 +173,13 @@ public class Console {
      * @param computerDefense ComputerDefense is an Entity to be displayed
      */
     public void isVictory(Entity computerDefense) {
-        if (victory == false && modeSelect == 1) {
+        logger.trace("Entrée méthode isVictory");
+        logger.debug("Entity = "+computerDefense);
+        if (!victory && modeSelect == 1) {
             System.out.println("the answer was :");
             computerDefense.display();
         }
+        logger.trace("sortie méthode isVictory");
     }
 
     /**
@@ -179,7 +198,9 @@ public class Console {
      * @see Console#duel(Entity, Entity, Entity, Entity, int)
      */
     public void game(Entity playerAttack, Entity computerDefense, Entity playerDefense, Entity computerAttack) {
-        for (int i = 0; i < nbTest && victory == false; i++) {
+        logger.trace("Entrée méthode game ");
+        logger.debug("entity1 = "+playerAttack+" ,entity2 = "+computerDefense+" ,entity3 = "+playerDefense+" et entity4 = "+computerAttack);
+        for (int i = 0; i < nbTest && !victory; i++) {
             System.out.println("Tour " + (i + 1) + " :");
             if (modeSelect == 1)
                 challenger(playerAttack, computerDefense, i);
@@ -188,6 +209,7 @@ public class Console {
             else if (modeSelect == 3)
                 duel(playerAttack, computerDefense, playerDefense, computerAttack, i);
         }
+        logger.trace("sortie méthode game");
     }
 
     /**
@@ -205,25 +227,38 @@ public class Console {
      * @see Console#modeSelect
      */
     private int selectMode(int nb) {
+        logger.trace("Entrée méthode selectMode");
+        logger.debug("nombre d'essai = "+nb);
         displaySelectMode();
         Scanner scan = new Scanner(System.in);
         int enter = scan.nextInt();
-        if (enter > 0 && enter < 4)
+        if (enter > 0 && enter < 4) {
+            logger.trace("sortie méthode selectMode");
+            logger.debug("return selectMode ="+enter);
             return enter;
-        else if (nb < 5)
-            return selectMode(nb++);
-        else
+        }
+        else if (nb < 5) {
+            logger.warn("Relance de selectMode");
+            logger.debug("nombre d'essai = "+ nb+" + 1");
+            return selectMode(++nb);
+        }
+        else {
+            logger.error("Erreur dans SelectMode");
+            logger.debug("Return selectMode = -1 car enter = "+enter);
             return -1;
+        }
     }
 
     /**
      * Display the menu of mode selection
      */
     public void displaySelectMode() {
+        logger.trace("Entrée méthode DisplaySelectMode ");
         System.out.println("What game mode do you want to play ? ");
         System.out.println("    1: Mode challenger ");
         System.out.println("    2: Mode defender ");
         System.out.println("    3: Mode duel ");
+        logger.trace("Sortie méthode DisplaySelectMode ");
     }
 
     /**
@@ -241,7 +276,9 @@ public class Console {
      * @see Entity
      */
     public void challenger(Entity player1, Entity player2, int index) {
-        String result = "";
+        logger.trace("Entrée méthode challenger ");
+        logger.debug(player1+" en entity1 , "+player2+" en entity2 et index = "+index);
+        String result;
         if (index == 0) {
             player2.defense();
             if (modeDev)
@@ -251,6 +288,7 @@ public class Console {
         result = comparatorSigns(player1, player2);
         System.out.println(result);
         isEqual(result, player1.getName(), index);
+        logger.trace("Sortie méthode challenger");
     }
 
     /**
@@ -261,14 +299,18 @@ public class Console {
      * @param turn   turn is a number of turns
      */
     public void isEqual(String result, String entity, int turn) {
+        logger.trace("Entrée méthode isEqual");
+        logger.debug("result = "+result+" ,entity = "+entity+" et le nombre de tour = "+turn);
         for (int i = 0; i < this.nbCombination; i++) {
             if (result.charAt(i) != '=') {
                 victory = false;
+                logger.trace("Sortie méthode isEqual avec victory = false");
                 return;
             }
         }
         victory = true;
         System.out.println("the " + entity + " win this game in " + (turn + 1) + " move(s)");
+        logger.trace("Sortie méthode isEqual avec victory = true");
     }
 
     /**
@@ -283,12 +325,16 @@ public class Console {
      * @see Entity
      */
     public String comparatorSigns(Entity player1, Entity player2) {
-        char signs = ' ';
+        logger.trace("Entrée méthode comparatorSigns");
+        logger.debug("Player1 = "+player1+" et player 2 = "+player2);
+        char signs;
         String result = "";
         for (int i = 0; i < nbCombination; i++) {
             signs = comparator(player2.combination[i], player1.combination[i]);
             result += signs;
         }
+        logger.trace("Sortie méthode comparatorSigns");
+        logger.debug("return result = "+result);
         return result;
     }
 
@@ -308,7 +354,9 @@ public class Console {
      * @see Entity
      */
     public void defender(Entity player1, Entity player2, int index) {
-        String result = "";
+        logger.trace("Entrée méthode defender");
+        logger.debug(player1+" en entity1 , "+player2+" en entity2 et index = "+index);
+        String result;
         if (index == 0)
             player1.defense();
         player2.attack();
@@ -318,6 +366,7 @@ public class Console {
 
         System.out.println(result);
         isEqual(result,player2.getName(), index);
+        logger.trace("Sortie méthode defender");
     }
 
     /**
@@ -334,9 +383,12 @@ public class Console {
      * @see Console#defender(Entity, Entity, int)
      */
     public void duel(Entity player1, Entity player2, Entity player3, Entity player4, int index) {
+        logger.trace("Entrée méthode duel");
+        logger.debug(player1+" en entity1 , "+player2+" en entity2"+player3+" en entity3 , "+player4+" en entity4 et index = "+index);
         challenger(player1, player2, index);
         if (!victory)
             defender(player3, player4, index);
+        logger.trace("Sortie méthode duel");
     }
 
     /**
@@ -347,11 +399,19 @@ public class Console {
      * @return a char with a sign (+ or - or =)
      */
     public char comparator(int num1, int num2) {
+        logger.trace("Entrée methode comparator");
+        logger.debug("num1 = "+num1+" et num2 = "+num2);
         if (num1 > num2) {
+            logger.trace("Sortie méthode comparator");
+            logger.debug("return char = '+'");
             return '+';
         } else if (num2 > num1) {
+            logger.trace("Sortie méthode comparator");
+            logger.debug("return char = '-'");
             return '-';
         } else {
+            logger.trace("Sortie méthode comparator");
+            logger.debug("return char = '='");
             return '=';
         }
     }
