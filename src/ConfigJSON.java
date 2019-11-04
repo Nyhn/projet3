@@ -70,7 +70,7 @@ public class ConfigJSON{
      */
     public boolean readModeDev(){
         logger.trace("Entrée méthode readModeDev");
-        logger.debug("Return nbTest = "+object.getInt("modeDev"));
+        logger.debug("Return nbTest = "+object.getBoolean("modeDev"));
         logger.trace("Sortie méthode readModeDev");
         return object.getBoolean("modeDev");
     }

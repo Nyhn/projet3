@@ -1,5 +1,5 @@
 {
-  "sizeCombination" : 1,
-  "nbTest" : 3,
-  "modeDev" : "true"
+  "sizeCombination" : 8,
+  "nbTest" : 5,
+  "modeDev" : "false"
 }
