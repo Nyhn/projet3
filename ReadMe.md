@@ -2,11 +2,11 @@
 
 Le projet consiste à créer un **mécanisme de recherche d’une combinaison à X chiffres**.
 
-Avant tout :  Récupérer le dossier P3_EscapeGameOnline.
+Avant tout :  Récupérer le dossier Projet3.
 
 ###I - Éxécuter le programme :
 Étape à suivre:
-1.  Ouvrir le terminal et se rendre dans le dossier P3_EscapeGameOnline.
+1.  Ouvrir le terminal et se rendre dans le dossier Projet3.
 2.  Éxécuter la commande :
 >			java -jar projet3.jar
 3.  Suivre les instructions du terminal.
