@@ -42,7 +42,7 @@ public abstract class Entity {
      * @see Entity#sizeCombination
      */
     public Entity(int sizeCombination, String name) {
-        logger.trace("Instanciation d'un Objet Entity");
+        logger.trace("instantiation of an object Entity");
         logger.debug("sizeCombination = "+sizeCombination+" , name = "+name);
         this.name = name;
         this.sizeCombination = sizeCombination;
@@ -73,12 +73,12 @@ public abstract class Entity {
      * Display the combination
      */
     public void display() {
-        logger.trace("Entrée méthodes display");
+        logger.trace("Input procedure display");
         for (int i = 0; i < this.sizeCombination; i++) {
             System.out.print(combination[i]);
         }
         System.out.println();
-        logger.trace("Sortie méthode display");
+        logger.trace("Output procedure display");
     }
 
     /**

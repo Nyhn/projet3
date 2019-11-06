@@ -11,10 +11,10 @@ public class Main {
      */
     private static Logger logger = Logger.getLogger(Main.class);
     public static void main(String[] args) {
-        logger.info("Lancement du programme");
+        logger.info("Program launch");
         ConfigJSON configuration = new ConfigJSON(new File("configuration.json"));
         Console console = new Console(configuration.readSizeCombination(), configuration.readModeDev(), configuration.readNbTest());
         console.run();
-        logger.info("Fin du programme");
+        logger.info("end of the program");
     }
 }

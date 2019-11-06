@@ -26,7 +26,7 @@ public class ConfigJSON{
      * @see ConfigJSON#object
      */
     public ConfigJSON(File file) {
-        logger.trace("Instanciation d'un objet ConfigJSON");
+        logger.trace("instantiation of an object ConfigJSON");
         logger.debug("File = "+file);
         try {
             this.configurationJSON = utf8FileToString(file);
@@ -43,9 +43,9 @@ public class ConfigJSON{
      * @see ConfigJSON#object
      */
     public int readNbTest(){
-        logger.trace("Entrée méthode readNbTest");
+        logger.trace("Input procedure readNbTest");
         logger.debug("Return nbTest = "+object.getInt("nbTest"));
-        logger.trace("Sortie méthode readNbTest");
+        logger.trace("Output procedure readNbTest");
         return object.getInt("nbTest");
     }
 
@@ -56,9 +56,9 @@ public class ConfigJSON{
      * @see ConfigJSON#object
      */
     public int readSizeCombination(){
-        logger.trace("Entrée méthode readSizeCombination");
+        logger.trace("Input procedure readSizeCombination");
         logger.debug("Return nbTest = "+object.getInt("sizeCombination"));
-        logger.trace("Sortie méthode readSizeCombination");
+        logger.trace("Output procedure readSizeCombination");
         return object.getInt("sizeCombination");
     }
 
@@ -69,9 +69,9 @@ public class ConfigJSON{
      * @see ConfigJSON#object
      */
     public boolean readModeDev(){
-        logger.trace("Entrée méthode readModeDev");
+        logger.trace("Input procedure readModeDev");
         logger.debug("Return nbTest = "+object.getBoolean("modeDev"));
-        logger.trace("Sortie méthode readModeDev");
+        logger.trace("Output procedure readModeDev");
         return object.getBoolean("modeDev");
     }
 

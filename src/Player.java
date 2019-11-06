@@ -34,7 +34,7 @@ public class Player extends Entity {
      */
     public Player(int sizeCombination, String name) {
         super(sizeCombination, name);
-        logger.trace("Instanciation d'un objet Player");
+        logger.trace("instantiation of an object Player");
         logger.debug("sizeCombination = "+sizeCombination+" et name = "+name);
     }
 
@@ -48,7 +48,7 @@ public class Player extends Entity {
      */
     @Override
     public void defense() {
-        logger.trace("Entrée méthode defense");
+        logger.trace("Input procedure defense");
         Scanner scan = new Scanner(System.in);
         String enter;
         do {
@@ -57,7 +57,7 @@ public class Player extends Entity {
         } while (enter.length() != sizeCombination);
         for (int i = 0; i < sizeCombination; i++)
             this.combination[i] = Character.digit(enter.charAt(i), 10);
-        logger.trace("Sortie méthode defense");
+        logger.trace("Output procedure defense");
     }
 
     /**
@@ -68,9 +68,9 @@ public class Player extends Entity {
      */
     @Override
     public void attack() {
-        logger.trace("Entrée méthode attack");
+        logger.trace("Input procedure attack");
         this.defense();
-        logger.trace("Sortie méthode attack");
+        logger.trace("Output procedure attack");
     }
 
     /**
@@ -95,9 +95,9 @@ public class Player extends Entity {
      * @see Entity#display()
      */
     public void display() {
-        logger.trace("Entrée méthode display");
+        logger.trace("Input procedure display");
         System.out.print("Player : ");
         super.display();
-        logger.trace("Sortie méthode display");
+        logger.trace("Output procedure display");
     }
 }

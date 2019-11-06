@@ -45,8 +45,8 @@ public class IA extends Entity {
      */
     public IA(int sizeCombination, String name) {
         super(sizeCombination, name);
-        logger.trace("Instanciation d'un objet IA");
-        logger.debug("IA(sizeCombination = "+sizeCombination+" et name = "+name+")");
+        logger.trace("instantiation of an object IA");
+        logger.debug("IA(sizeCombination = "+sizeCombination+" and name = "+name+")");
         init();
     }
 
@@ -59,11 +59,11 @@ public class IA extends Entity {
      */
     @Override
     public void defense() {
-        logger.trace("Entrée méthode defense");
+        logger.trace("Input procedure defense");
         for (int i = 0; i < this.sizeCombination; i++) {
             combination[i] = (int) (random() * 9);
         }
-        logger.trace("Sortie méthode defense");
+        logger.trace("Output procedure defense");
     }
 
     /**
@@ -76,11 +76,11 @@ public class IA extends Entity {
      */
     @Override
     public void attack() {
-        logger.trace("Entrée méthode attack");
+        logger.trace("Input procedure attack");
         for (int i = 0; i < this.sizeCombination; i++) {
             combination[i] = (int) (maxMin[i][1] + random() * (maxMin[i][0] - maxMin[i][1]));
         }
-        logger.trace("Sortie méthode attack");
+        logger.trace("Output procedure attack");
     }
 
     /**
@@ -91,7 +91,7 @@ public class IA extends Entity {
      * @see Entity#sizeCombination
      */
     public void init() {
-        logger.trace("Entrée méthode init");
+        logger.trace("Input procedure init");
         maxMin = new int[sizeCombination][2];
         for (int i = 0; i < sizeCombination; i++) {
             for (int j = 0; j < 2; j++) {
@@ -103,7 +103,7 @@ public class IA extends Entity {
                 }
             }
         }
-        logger.trace("Sortie méthode init");
+        logger.trace("Output procedure init");
     }
 
     /**
@@ -112,10 +112,10 @@ public class IA extends Entity {
      * @see Entity#display()
      */
     public void display() {
-        logger.trace("Entrée méthode display");
+        logger.trace("Input procedure display");
         System.out.print("["+name+"](Combination of " + sizeCombination + ") :");
         super.display();
-        logger.trace("Sortie méthode display");
+        logger.trace("Output procedure display");
     }
 
     /**
@@ -128,8 +128,8 @@ public class IA extends Entity {
      */
     @Override
     public void updateTable(char signs, int index) {
-        logger.trace("Entrée méthode updateTable avec ");
-        logger.debug("updateTable(signs = "+signs+" et index = "+index+")");
+        logger.trace("Input procedure updateTable");
+        logger.debug("updateTable(signs = "+signs+" and index = "+index+")");
         if (signs == '+')
             maxMin[index][1] = combination[index] + 1;
         if (signs == '-')
@@ -138,7 +138,7 @@ public class IA extends Entity {
             maxMin[index][1] = combination[index];
             maxMin[index][0] = combination[index];
         }
-        logger.trace("Sortie méthode updateTable");
+        logger.trace("Output procedure updateTable");
     }
 
     /**
@@ -148,11 +148,11 @@ public class IA extends Entity {
      */
     @Override
     public void update(String signs) {
-        logger.trace("Entrée méthode update");
+        logger.trace("Input procedure update");
         logger.debug("update(signs = \""+signs+"\")");
         for (int i = 0; i < sizeCombination; i++)
             updateTable(signs.charAt(i), i);
-        logger.trace("Sortie méthode update");
+        logger.trace("Output procedure update");
     }
 }
 
