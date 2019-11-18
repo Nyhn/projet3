@@ -1,4 +1,7 @@
+package Game;
+
 import org.apache.log4j.Logger;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
@@ -17,8 +20,8 @@ public class ConfigJSON{
     JSONObject object;
 
     /**
-     * Builder of ConfigJSON
-     * when building a ConfigJSON object, we define File of the configuration of JSON
+     * Builder of Game.ConfigJSON
+     * when building a Game.ConfigJSON object, we define File of the configuration of JSON
      * and we recover the string of the file for then the transforms in JSON object
      * @param file
      *      file is the name of file of Configuration of JSON
@@ -26,16 +29,47 @@ public class ConfigJSON{
      * @see ConfigJSON#object
      */
     public ConfigJSON(File file) {
-        logger.trace("instantiation of an object ConfigJSON");
+        logger.trace("instantiation of an object Game.ConfigJSON");
         logger.debug("File = "+file);
         try {
             this.configurationJSON = utf8FileToString(file);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("the file has encountered an open problem or is non-existent");
         }
-        this.object = new JSONObject(this.configurationJSON);
+        try {
+            this.object = new JSONObject(this.configurationJSON);
+        } catch (JSONException e) {
+            logger.error("Error of "+file);
+            writeDefaultJSONConfig(file);
+            try {
+                this.configurationJSON = utf8FileToString(file);
+            }catch (IOException f){
+                logger.error("the file has encountered an open problem or is non-existent");
+            }
+            this.object = new JSONObject(this.configurationJSON);
+        }
     }
 
+    /**
+     * writeDefaultJSONConfig recreate the file JSON with default Config
+     * @param file
+     *        Name of file
+     */
+    public void writeDefaultJSONConfig(File file){
+        PrintWriter writer;
+        try {
+            writer = new PrintWriter(file);
+            writer.println("{");
+            writer.println("  \"sizeCombination\" : 4,");
+            writer.println("  \"nbTest\" : 5,");
+            writer.println("  \"modeDev\" : false");
+            writer.println("}");
+            writer.close();
+        } catch (FileNotFoundException e) {
+            logger.error("Impossible to writer in "+file);
+        }
+
+    }
     /**
      * readNbTest retrieves NbTest of JSON Object
      * @return nbTest
